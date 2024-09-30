@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scraping Propiedades</title>
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <h1>Scraping de Propiedades</h1>
+
+    <!-- Botón para iniciar el scraping -->
+    <button id="scrapeButton">Scrapear Propiedades</button>
+
+    <!-- Área para mostrar resultados -->
+    <div id="result"></div>
+
+    <script>
+      const URL = "/api/scrape"; // Proxy local
+
+      async function scrapeProperties() {
+        try {
+          // Hacer la solicitud al servidor Node.js que actúa como proxy
+          const response = await fetch(URL);
+          const properties = await response.json(); // Recibe el JSON con los datos procesados
+          properties.sort((a, b) => a.price - b.price);
+
+          // Mostrar los resultados en el HTML
+          const resultDiv = document.getElementById("result");
+          resultDiv.innerHTML = ""; // Limpiar resultados previos
+
+          properties.forEach((property) => {
+            console.log(property.price);
+            if (property.price === 0) {
+              property.price = "Consultar";
+            } else {
+              property.price = property.price + ".000 USD";
+            }
+            const propertyInfo = document.createElement("div");
+            propertyInfo.className = "card";
+
+            const propertyImage = document.createElement("img");
+            propertyImage.src = property.image;
+            propertyImage.alt = property.title;
+            propertyInfo.appendChild(propertyImage);
+
+            const propertyBody = document.createElement("div");
+            propertyBody.className = "card-body";
+            propertyInfo.appendChild(propertyBody);
+
+            const propertyTitle = document.createElement("h5");
+            propertyTitle.className = "card-title";
+            propertyTitle.textContent = property.title;
+            propertyBody.appendChild(propertyTitle);
+
+            const propertyPrice = document.createElement("p");
+            propertyPrice.className = "card-text";
+            propertyPrice.textContent = `${property.price}`;
+            propertyBody.appendChild(propertyPrice);
+
+            const propertyLink = document.createElement("a");
+            propertyLink.href = property.link;
+            propertyLink.target = "_blank";
+            propertyLink.className = "btn btn-primary";
+            propertyLink.textContent = "Ver Propiedad";
+            propertyBody.appendChild(propertyLink);
+
+            resultDiv.appendChild(propertyInfo);
+          });
+        } catch (error) {
+          console.error("Error al realizar el scraping:", error);
+        }
+      }
+
+      // Asignar el evento click al botón
+      document
+        .getElementById("scrapeButton")
+        .addEventListener("click", scrapeProperties);
+    </script>
+  </body>
+</html>

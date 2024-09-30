@@ -1,0 +1,53 @@
+#result {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la siguiente línea */
+  justify-content: space-between; /* Espacio entre las tarjetas */
+  gap: 50px; /* Espacio entre tarjetas */
+  padding: 20px; /* Espacio interno en el contenedor */
+}
+
+.card {
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+  width: 250px; /* Ancho fijo */
+  text-align: center; /* Centrar texto */
+  overflow: hidden; /* Evitar que el contenido sobresalga */
+  display: flex;
+  flex-direction: column;
+}
+
+.card h5 {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.card img {
+  width: 100%; /* Imagen ocupa todo el ancho de la tarjeta */
+  height: 200px; /* Altura fija */
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
+.card h3 {
+  margin: 0; /* Margen superior e inferior */
+}
+
+.card p {
+  margin: 0; /* Margen superior e inferior */
+}
+
+.card a {
+  display: inline-block; /* Para que el enlace sea un bloque */
+  margin-top: 10px; /* Margen superior */
+  padding: 10px 15px; /* Espaciado interno */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  border-radius: 5px; /* Bordes redondeados del botón */
+  text-decoration: none; /* Sin subrayado */
+  margin-bottom: 10px;
+}
+
+.card a:hover {
+  background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
