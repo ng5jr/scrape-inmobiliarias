@@ -400,6 +400,10 @@ export default async function handler(req, res) {
 
     res.json(properties);
   } catch (error) {
-    res.status(500).json({ error: "Error general en el scraping" });
+    console.error("Error en el scraping:", error.message || error);
+    // Devolver un error JSON si falla el scraping
+    res
+      .status(500)
+      .json({ error: "Error al realizar el scraping en el servidor" });
   }
 }

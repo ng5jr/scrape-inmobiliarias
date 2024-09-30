@@ -22,7 +22,8 @@
         try {
           // Hacer la solicitud al servidor Node.js que actúa como proxy
           const response = await fetch(URL);
-          const properties = await response.json(); // Recibe el JSON con los datos procesados
+          const responseText = await response.text(); // Ver el contenido de la respuesta
+          console.log(responseText); // Recibe el JSON con los datos procesados
           properties.sort((a, b) => a.price - b.price);
 
           // Mostrar los resultados en el HTML
